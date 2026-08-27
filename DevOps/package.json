@@ -1,0 +1,13 @@
+{
+  "name": "devops",
+  "version": "1.0.0",
+  "description": "YAML: IS the lenguaje used for create and reproduces \r automations those are into the most programming apps",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js",
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
