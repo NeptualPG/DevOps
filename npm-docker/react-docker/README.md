@@ -73,3 +73,58 @@ export default defineConfig([
 ])
 
 ```
+
+
+## Docker build
+
+Commands:
+  ```shell 
+    docker build -t react-docker .
+    docker run react-docker
+  ```
+
+it doesn't work 
+So we need map the port we are using
+
+New Commands:
+  ```shell 
+    docker run -p 5173:5173 react-docker
+  ```
+
+  persistence:
+    to the code can update each time that we are going to make changes:
+
+    package.json
+
+      ```js
+         {
+            "scripts": {
+              "dev": "vite --host 0.0.0.0 --watch"
+            }
+          }
+      ```
+      
+    vite.config.ts:
+
+      ```js
+        import { defineConfig } from 'vite'
+        import react from '@vitejs/plugin-react'
+
+        // https://vite.dev/config/
+        export default defineConfig({
+          plugins: [react()],
+          server: {
+            host: '0.0.0.0',
+            watch: {
+              usePolling: true,
+            },
+          },
+        })
+
+      ```
+
+
+      ```shell 
+        docker build -t react-docker .
+        docker run -it -p 5173:5173 -v "$(pwd):/app" -v /app/node_modules react-docker
+      ```
